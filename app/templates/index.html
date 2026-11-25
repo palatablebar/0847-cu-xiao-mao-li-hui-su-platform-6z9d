@@ -27,6 +27,27 @@
       <div class="panel-head"><h2>运行对账</h2></div>
       <div class="ledger" id="ledger-list"></div>
     </article>
+    <article class="panel" id="panel-returns">
+      <div class="panel-head">
+        <h2>退货跨日净毛利</h2>
+        <span class="hint" id="returns-hint">按日</span>
+      </div>
+      <div class="returns">
+        <label for="returns-date">查看日期</label>
+        <div class="returns-actions">
+          <input id="returns-date" type="date" value="{{ p.returns_date }}">
+          <button id="returns-query" type="button">查当日净毛利</button>
+        </div>
+        <div class="returns-day">
+          <span>当日净毛利</span>
+          <strong id="returns-day-value">--</strong>
+          <small id="returns-day-note"></small>
+        </div>
+        <div class="table-wrap">
+          <table><thead id="returns-head"></thead><tbody id="returns-body"></tbody></table>
+        </div>
+      </div>
+    </article>
     <article class="panel" id="panel-review">
       <div class="panel-head"><h2>批次复核</h2><span class="hint" id="revision">rev 0</span></div>
       <div class="review">

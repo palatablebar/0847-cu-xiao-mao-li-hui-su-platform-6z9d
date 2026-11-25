@@ -129,3 +129,17 @@
   .p0847 .panel, .p0847 .metric { break-inside: avoid; border-color:#999; }
   .p0847 .print-only { display:block; }
 }
+
+/* 退货跨日记账面板 */
+.p0847 .returns { display: grid; gap: 8px; }
+.p0847 .returns label { color: var(--muted); font-size: 12px; }
+.p0847 .returns-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.p0847 .returns-actions input { padding: .4em .55em; }
+.p0847 .returns-day {
+  display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 4px 12px;
+  border-top: 1px solid var(--line); border-bottom: 1px dashed var(--line); padding: 8px 0;
+}
+.p0847 .returns-day span { color: var(--muted); font-size: 12px; }
+.p0847 .returns-day strong { font: 700 clamp(20px, 2.6vw, 32px)/1 var(--font-num); font-variant-numeric: tabular-nums; }
+.p0847 .returns-day small { grid-column: 1 / -1; color: var(--muted); }
+.p0847 .returns .table-wrap { max-height: 240px; }

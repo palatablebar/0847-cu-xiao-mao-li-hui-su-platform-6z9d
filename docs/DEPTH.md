@@ -15,6 +15,7 @@
 | M5 运行对账 | 核对来源行、采信、隔离、重复与计算条目 | `POST /api/stages/reconcile` | `app/reconcile/ledger.py` | `tests/test_reconcile.py` |
 | M6 批次复核 | 带版本号签发或暂缓，拒绝陈旧复核 | `POST /api/runs/{id}/review` | `app/review/service.py` | `tests/test_review.py` |
 | M7 证据交付 | 仅在签发后输出可校验的复核证据 | `GET /api/runs/{id}/evidence` | `app/evidence/render.py` | `tests/test_evidence.py` |
+| M8 退货跨日记账 | 按到账日冲减收入、按已退款且已验收数量冲回成本、超额不入账、作废恢复、凭据幂等 | `POST /api/returns/ledger`、`POST /api/returns/ingest`、`POST /api/returns/runs` | `app/returns/engine.py`、`app/returns/service.py`、`app/returns/store.py` | `tests/test_returns.py`、`tests/test_returns_service.py`、`tests/test_returns_store.py`、`tests/test_returns_http.py` |
 
 ## 输入陷阱
 
@@ -36,3 +37,7 @@
 ## 深度边界
 
 采信层区分编码、重复表头、列数、空值、全角字符、前导零与冲突重复；整理层负责单位和字段边界；计算层执行核心规则；判定层保留原因码；对账层要求来源行等于采信、隔离、重复和忽略之和；复核层使用版本号阻止陈旧签发。
+
+退货层单独维护收入冲减日与成本冲回日：只退款未验收时当天只冲收入（不冲成本，避免虚增毛利），
+验收作废时撤销成本冲回但保留已到账退款，累计退款超过原售数量时超额不入账，
+同一凭据重放不重复记账；日级账表可按日期查询退货后的当日净毛利。规则见 `docs/RETURNS.md`。

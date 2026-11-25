@@ -1,0 +1,72 @@
+{
+  "profile": "returns",
+  "sales": [
+    {
+      "sale_id": "S-1001",
+      "sale_date": "2026-11-01",
+      "line_qty": 10,
+      "net_revenue_cents": 9000,
+      "net_cost_cents": 5000
+    },
+    {
+      "sale_id": "S-1002",
+      "sale_date": "2026-11-01",
+      "line_qty": 4,
+      "net_revenue_cents": 4000,
+      "net_cost_cents": 2400
+    },
+    {
+      "sale_id": "S-1003",
+      "sale_date": "2026-11-02",
+      "line_qty": 6,
+      "net_revenue_cents": 6000,
+      "net_cost_cents": 3600
+    }
+  ],
+  "documents": [
+    {
+      "credential_id": "RF-1001",
+      "kind": "refund",
+      "sale_id": "S-1001",
+      "qty": 4,
+      "received_date": "2026-11-05",
+      "amount_cents": 3600
+    },
+    {
+      "credential_id": "AC-2001",
+      "kind": "acceptance",
+      "sale_id": "S-1001",
+      "qty": 4,
+      "accepted_date": "2026-11-03"
+    },
+    {
+      "credential_id": "RF-1002",
+      "kind": "refund",
+      "sale_id": "S-1002",
+      "qty": 5,
+      "received_date": "2026-11-06",
+      "amount_cents": 5000
+    },
+    {
+      "credential_id": "AC-2002",
+      "kind": "acceptance",
+      "sale_id": "S-1002",
+      "qty": 5,
+      "accepted_date": "2026-11-07"
+    },
+    {
+      "credential_id": "V-3001",
+      "kind": "void",
+      "target_doc_id": "AC-2002",
+      "voided_date": "2026-11-08"
+    },
+    {
+      "credential_id": "RF-1003",
+      "kind": "refund",
+      "sale_id": "S-1003",
+      "qty": 2,
+      "received_date": "2026-11-09",
+      "amount_cents": 2000
+    }
+  ]
+}

@@ -6,6 +6,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 from app.catalog import SPEC
 from app.config import MAX_FILE, ROOT
 from app.errors import DomainIssue, error_response
+from app.returns.store import ReturnsStore
 from app.review.store import Store
 from app.routes import api
 
@@ -13,7 +14,9 @@ from app.routes import api
 def create_app(database=None):
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = MAX_FILE + 64 * 1024
-    app.extensions["runs"] = Store(database or os.getenv("WORKBENCH_DB", str(ROOT / "instance" / "workbench.sqlite3")))
+    path = database or os.getenv("WORKBENCH_DB", str(ROOT / "instance" / "workbench.sqlite3"))
+    app.extensions["runs"] = Store(path)
+    app.extensions["returns"] = ReturnsStore(path)
     app.register_error_handler(DomainIssue, error_response)
     app.register_error_handler(RequestEntityTooLarge, lambda _: error_response(DomainIssue("FILE_TOO_LARGE", 413)))
     app.register_blueprint(api)
